@@ -1,0 +1,113 @@
+// connecting the value of potentiometer to LED lights
+int led1Pin = 8;
+int led2Pin = 9;
+int led3Pin = 10;
+int led4Pin = 11;
+int led5Pin = 12;
+int led6Pin = 13;
+int potPin = 5;
+//int buzzerPin = 3;
+int potValue = 0;
+
+void setup()
+{
+pinMode(led1Pin, OUTPUT);
+pinMode(led2Pin, OUTPUT);
+pinMode(led3Pin, OUTPUT);
+pinMode(led4Pin, OUTPUT);
+pinMode(led5Pin, OUTPUT);
+pinMode(led6Pin, OUTPUT);
+pinMode(potPin, INPUT);
+//pinMode(buzzerPin, OUTPUT);
+  
+// turn the serial port on
+Serial.begin(9600);
+}
+
+void loop()
+{
+// get potentiometer value
+potValue = analogRead(potPin);
+  
+//print the contents of the variable to the serial monitor
+//Serial.println(potValue);
+  
+// remap the potValue for buzzer (if needed)
+if (potValue < 1)
+{
+digitalWrite(led1Pin, LOW);
+digitalWrite(led2Pin, LOW);
+digitalWrite(led3Pin, LOW);
+digitalWrite(led4Pin, LOW);
+digitalWrite(led5Pin, LOW);
+digitalWrite(led6Pin, LOW);
+//tone(buzzerPin, 0, 50);
+}
+else if (potValue < 1024/6)
+{
+digitalWrite(led1Pin, HIGH);
+digitalWrite(led2Pin, LOW);
+digitalWrite(led3Pin, LOW);
+digitalWrite(led4Pin, LOW);
+digitalWrite(led5Pin, LOW);
+digitalWrite(led6Pin, LOW);
+//tone(buzzerPin, 261.63, 50);
+  
+}
+else if (potValue < (1024/6)*2)
+{
+digitalWrite(led1Pin, HIGH);
+digitalWrite(led2Pin, HIGH);
+digitalWrite(led3Pin, LOW);
+digitalWrite(led4Pin, LOW);
+digitalWrite(led5Pin, LOW);
+digitalWrite(led6Pin, LOW);
+//tone(buzzerPin, 293.67, 50);
+}
+else if (potValue < (1024/6)*3)
+{
+digitalWrite(led1Pin, HIGH);
+digitalWrite(led2Pin, HIGH);
+digitalWrite(led3Pin, HIGH);
+digitalWrite(led4Pin, LOW);
+digitalWrite(led5Pin, LOW);
+digitalWrite(led6Pin, LOW);
+//tone(buzzerPin, 329.63, 50);
+}
+else if (potValue < (1024/6)*4)
+{
+digitalWrite(led1Pin, HIGH);
+digitalWrite(led2Pin, HIGH);
+digitalWrite(led3Pin, HIGH);
+digitalWrite(led4Pin, HIGH);
+digitalWrite(led5Pin, LOW);
+digitalWrite(led6Pin, LOW);
+//tone(buzzerPin, 349.23, 50);
+}
+else if (potValue < (1024/6)*5)
+{
+digitalWrite(led1Pin, HIGH);
+digitalWrite(led2Pin, HIGH);
+digitalWrite(led3Pin, HIGH);
+digitalWrite(led4Pin, HIGH);
+digitalWrite(led5Pin, HIGH);
+digitalWrite(led6Pin, LOW);
+//tone(buzzerPin, 392.0, 50);
+}
+else
+{
+digitalWrite(led1Pin, HIGH);
+digitalWrite(led2Pin, HIGH);
+digitalWrite(led3Pin, HIGH);
+digitalWrite(led4Pin, HIGH);
+digitalWrite(led5Pin, HIGH);
+digitalWrite(led6Pin, HIGH);
+//tone(buzzerPin, 440.0, 50);
+}
+  
+int val = map(analogRead(potPin), 0, 1023, 0, 255);
+Serial.println(val);
+  
+delay(25);
+  
+}
